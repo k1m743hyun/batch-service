@@ -1,0 +1,49 @@
+version: "3"
+services:
+  database:
+    image: mysql
+    container_name: batch_db
+    environment:
+      - MYSQL_DATABASE=batch_db
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=batch
+      - MYSQL_PASSWORD=batch
+      - TZ='Asia/Seoul'
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db/batch/data:/var/lib/mysql
+    networks:
+      - batch_network
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - database
+    links:
+      - database
+    ports:
+      - 8080:8080
+    container_name: batch_service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/batch_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - batch_network
+#  redis:
+#    image: redis:alpine
+#    command: redis-server --port 6379
+#    container_name: batch_service_redis
+#    hostname: batch_service_redis
+#    labels:
+#      - "name=redis"
+#      - "mode=standalone"
+#    ports:
+#      - 6379:6379
+
+networks:
+  batch_network:
