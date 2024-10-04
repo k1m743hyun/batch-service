@@ -2,21 +2,32 @@ spring:
   application:
     name: batch-service
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/batch_db
-    username: batch
-    password: batch
-    type: com.mysql.cj.jdbc.MysqlDataSource
-
+    meta:
+      hikari:
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+        url: jdbc:log4jdbc:mysql://localhost:3306/meta
+        username: batch
+        password: batch
+    domain:
+      hikari:
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+        url: jdbc:log4jdbc:mysql://localhost:3306/domain
+        username: batch
+        password: batch
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
-      hibernate.format_sql: true
+      hibernate:
+        show_sql: true
+        format_sql: true
       dialect: org.hibernate.dialect.MySQL8Dialect
+  sql:
+    init:
+      mode: always
   batch:
-    jdbc:
-      initialize-schema: always
     job:
       enabled: true
+    jdbc:
+      initialize-schema: always
