@@ -16,24 +16,24 @@ services:
       - ./db/batch/data:/var/lib/mysql
     networks:
       - batch_network
-  webapp:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    restart: always
-    depends_on:
-      - database
-    links:
-      - database
-    ports:
-      - 8080:8080
-    container_name: batch_service
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/batch_db
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-    networks:
-      - batch_network
+#  webapp:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    restart: always
+#    depends_on:
+#      - database
+#    links:
+#      - database
+#    ports:
+#      - 8080:8080
+#    container_name: batch_service
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/batch_db
+#      SPRING_DATASOURCE_USERNAME: root
+#      SPRING_DATASOURCE_PASSWORD: root
+#    networks:
+#      - batch_network
 #  redis:
 #    image: redis:alpine
 #    command: redis-server --port 6379

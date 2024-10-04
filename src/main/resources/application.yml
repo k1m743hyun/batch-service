@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: batch-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/batch_db
+    username: batch
+    password: batch
+    type: com.mysql.cj.jdbc.MysqlDataSource
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      dialect: org.hibernate.dialect.MySQL8Dialect
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: true
