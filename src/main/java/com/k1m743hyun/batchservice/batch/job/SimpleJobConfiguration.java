@@ -1,4 +1,4 @@
-package com.k1m743hyun.batchservice.config;
+package com.k1m743hyun.batchservice.batch.job;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
