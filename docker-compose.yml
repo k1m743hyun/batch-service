@@ -1,21 +1,35 @@
 version: "3"
 services:
-  database:
-    image: mysql
+  postgres:
+    image: postgres:latest
     container_name: batch_db
     environment:
-      - MYSQL_DATABASE=meta
-      - MYSQL_ROOT_HOST=%
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=batch
-      - MYSQL_PASSWORD=batch
+#      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=batchdb
       - TZ='Asia/Seoul'
     ports:
-      - 3306:3306
+      - 5432:5432
     volumes:
-      - ./db/batch/data:/var/lib/mysql
+      - ./db/postgres/batch/data:/var/lib/postgresql/batchdb
     networks:
       - batch_network
+#  database:
+#    image: mysql
+#    container_name: batch_db
+#    environment:
+#      - MYSQL_DATABASE=meta
+#      - MYSQL_ROOT_HOST=%
+#      - MYSQL_ROOT_PASSWORD=root
+#      - MYSQL_USER=batch
+#      - MYSQL_PASSWORD=batch
+#      - TZ='Asia/Seoul'
+#    ports:
+#      - 3306:3306
+#    volumes:
+#      - ./db/batch/data:/var/lib/mysql
+#    networks:
+#      - batch_network
 #  webapp:
 #    build:
 #      context: .
