@@ -1,13 +1,48 @@
 spring:
   application:
     name: batch-service
-  h2:
-    console:
-      enabled: true
+  profiles:
+    active: mariadb
+
+---
+
+spring:
+  profiles:
+    active: local
   datasource:
-    url: jdbc:h2:mem:db;MODE=MYSQL
-    username: sa
-    password:
+    hikari:
+      url: jdbc:h2:mem:db;MODE=MYSQL
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+  batch:
+    job:
+      enabled: true
+
+---
+
+spring:
+  profiles:
+    active: mariadb
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mariadb://localhost:3306/batchdb
+      username: root
+      password: root
+      driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  batch:
+    job:
+      enabled: true
+    jdbc:
+      initialize-schema: always
+
 #    meta:
 #      hikari:
 #        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
@@ -20,19 +55,19 @@ spring:
 #        url: jdbc:log4jdbc:mysql://localhost:3306/domain
 #        username: batch
 #        password: batch
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-#      dialect: org.hibernate.dialect.MySQL8Dialect
-#  sql:
-#    init:
-#      mode: always
-  batch:
-    job:
-      enabled: true
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+#        show_sql: true
+#        format_sql: true
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+#    sql:
+#      init:
+#        mode: always
+#  batch:
+#    job:
+#      enabled: true
 #    jdbc:
 #      initialize-schema: always
