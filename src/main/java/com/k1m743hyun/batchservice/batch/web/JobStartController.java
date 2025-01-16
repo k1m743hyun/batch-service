@@ -25,7 +25,7 @@ public class JobStartController {
     JobLauncher jobLauncher;
 
     @Autowired
-    @Qualifier("jpaCursorItemReaderJob")
+    @Qualifier("jdbcPagingItemReaderJob")
     Job job;
 
     @GetMapping("/start")
