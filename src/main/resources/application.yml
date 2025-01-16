@@ -4,14 +4,14 @@ spring:
   profiles:
     active: postgres
 
----
-
+#---
+#
 #spring:
 #  profiles:
 #    active: local
 #  datasource:
 #    hikari:
-#      url: jdbc:h2:mem:db;MODE=MYSQL
+#      jdbc-url: jdbc:h2:mem:db;MODE=MYSQL
 #      username: sa
 #      password:
 #      driver-class-name: org.h2.Driver
@@ -26,13 +26,19 @@ spring:
 #    active: mariadb
 #  datasource:
 #    hikari:
-#      jdbc-url: jdbc:mariadb://localhost:3306/batchdb
+#      #jdbc-url: jdbc:mariadb://localhost:3306/batchdb
+#      jdbc-url: jdbc:mysql://localhost:3306/batchdb
 #      username: root
 #      password: root
-#      driver-class-name: org.mariadb.jdbc.Driver
+#      #driver-class-name: org.mariadb.jdbc.Driver
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#  sql:
+#    init:
+#      mode: always
 #  jpa:
 #    hibernate:
 #      ddl-auto: create
+#    defer-datasource-initialization: true
 #    properties:
 #      hibernate:
 #        show_sql: true
@@ -42,8 +48,8 @@ spring:
 #      enabled: true
 #    jdbc:
 #      initialize-schema: always
-
----
+#
+#---
 
 spring:
   profiles:
@@ -52,20 +58,26 @@ spring:
     url: jdbc:postgresql://localhost:5432/batchdb
     username: postgres
     password: postgres
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
   jpa:
+    database: postgresql
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
     properties:
       hibernate:
         show_sql: true
         format_sql: true
-        dialect: org.hibernate.dialect.PostgreSQLDialect
   batch:
     job:
       enabled: false
     jdbc:
       initialize-schema: always
       #table-prefix: batch.BATCH_
+
 
 #    meta:
 #      hikari:

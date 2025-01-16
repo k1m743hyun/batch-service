@@ -43,6 +43,7 @@ dependencies {
 
 	// Database
 	runtimeOnly 'org.postgresql:postgresql'
+//	runtimeOnly 'com.mysql:mysql-connector-j'
 //	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 //	implementation 'com.h2database:h2'
 
