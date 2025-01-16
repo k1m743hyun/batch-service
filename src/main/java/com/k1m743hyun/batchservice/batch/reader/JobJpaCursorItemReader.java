@@ -17,7 +17,7 @@ public class JobJpaCursorItemReader {
 
     public JpaCursorItemReader<Product> getAll() {
         return new JpaCursorItemReaderBuilder<Product>()
-                .name("jobJpaCursorReader")
+                .name("jobJpaCursorItemReader")
                 .entityManagerFactory(entityManagerFactory)
                 .queryString("SELECT productId, productName, productPrice FROM Product")
                 .currentItemCount(0)

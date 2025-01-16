@@ -25,9 +25,9 @@ public class JdbcPagingItemReaderJobConfiguration {
     private final JobJdbcPagingItemReader jobReader;
 
     @Bean
-    public Job jdbcPagingItemReaderJob(Step jdbcCursorItemReaderStep) {
+    public Job jdbcPagingItemReaderJob(Step jdbcPagingItemReaderStep) {
         return new JobBuilder("jdbcPagingItemReaderJob", jobRepository)
-                .start(jdbcCursorItemReaderStep)
+                .start(jdbcPagingItemReaderStep)
                 .build();
     }
 

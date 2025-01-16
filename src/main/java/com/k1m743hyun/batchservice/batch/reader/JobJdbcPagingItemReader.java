@@ -39,15 +39,15 @@ public class JobJdbcPagingItemReader {
 
     @Bean
     public PagingQueryProvider createQueryProvider() throws Exception {
+
+        Map<String, Order> sortKeys = new HashMap<>(1);
+        sortKeys.put("product_id", Order.ASCENDING);
+
         SqlPagingQueryProviderFactoryBean queryProvider = new SqlPagingQueryProviderFactoryBean();
         queryProvider.setDataSource(dataSource);
         queryProvider.setSelectClause("product_id, product_name, product_price");
         queryProvider.setFromClause("from product");
         //queryProvider.setWhereClause("where amount >= :amount");
-
-        Map<String, Order> sortKeys = new HashMap<>(1);
-        sortKeys.put("product_id", Order.ASCENDING);
-
         queryProvider.setSortKeys(sortKeys);
 
         return queryProvider.getObject();
