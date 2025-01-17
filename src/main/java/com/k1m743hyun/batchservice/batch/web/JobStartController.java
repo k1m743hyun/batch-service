@@ -25,7 +25,7 @@ public class JobStartController {
     JobLauncher jobLauncher;
 
     @Autowired
-    @Qualifier("repositoryItemReaderJob")
+    @Qualifier("jdbcBatchItemWriterJob")
     Job job;
 
     @GetMapping("/start")

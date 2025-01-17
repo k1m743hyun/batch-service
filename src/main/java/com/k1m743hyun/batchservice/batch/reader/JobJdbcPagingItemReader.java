@@ -25,11 +25,11 @@ public class JobJdbcPagingItemReader {
     public JdbcPagingItemReader<Product> getAll() throws Exception {
         JdbcPagingItemReader<Product> jdbcPagingItemReader = new JdbcPagingItemReaderBuilder<Product>()
                 .name("jobJdbcPagingItemReader")
-                .pageSize(3)
+                .pageSize(10)
                 .fetchSize(20)
                 .dataSource(dataSource)
                 .beanRowMapper(Product.class)
-                .maxItemCount(10)
+                .maxItemCount(30)
                 .currentItemCount(0)
                 .queryProvider(createQueryProvider())
                 .build();
@@ -46,7 +46,7 @@ public class JobJdbcPagingItemReader {
         SqlPagingQueryProviderFactoryBean queryProvider = new SqlPagingQueryProviderFactoryBean();
         queryProvider.setDataSource(dataSource);
         queryProvider.setSelectClause("product_id, product_name, product_price");
-        queryProvider.setFromClause("from product");
+        queryProvider.setFromClause("from tb_product");
         //queryProvider.setWhereClause("where amount >= :amount");
         queryProvider.setSortKeys(sortKeys);
 
