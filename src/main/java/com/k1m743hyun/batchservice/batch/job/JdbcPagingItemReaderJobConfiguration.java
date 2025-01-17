@@ -19,8 +19,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class JdbcPagingItemReaderJobConfiguration {
 
-    private final PlatformTransactionManager platformTransactionManager;
     private final JobRepository jobRepository;
+    private final PlatformTransactionManager platformTransactionManager;
 
     private final JobJdbcPagingItemReader jobReader;
 

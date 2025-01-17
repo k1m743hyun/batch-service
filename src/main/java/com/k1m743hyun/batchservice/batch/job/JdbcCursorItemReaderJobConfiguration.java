@@ -18,8 +18,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class JdbcCursorItemReaderJobConfiguration {
 
-    private final PlatformTransactionManager platformTransactionManager;
     private final JobRepository jobRepository;
+    private final PlatformTransactionManager platformTransactionManager;
 
     private final JobJdbcCursorItemReader jobReader;
 

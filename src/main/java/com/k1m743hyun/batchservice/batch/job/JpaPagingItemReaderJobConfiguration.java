@@ -21,8 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 public class JpaPagingItemReaderJobConfiguration {
 
-    private final PlatformTransactionManager platformTransactionManager;
     private final JobRepository jobRepository;
+    private final PlatformTransactionManager platformTransactionManager;
 
     private final JobJpaPagingItemReader jobReader;
 

@@ -22,8 +22,8 @@ import java.util.Objects;
 @Configuration
 public class JpaCursorItemReaderJobConfiguration {
 
-    private final PlatformTransactionManager platformTransactionManager;
     private final JobRepository jobRepository;
+    private final PlatformTransactionManager platformTransactionManager;
 
     private final JobJpaCursorItemReader jobReader;
 

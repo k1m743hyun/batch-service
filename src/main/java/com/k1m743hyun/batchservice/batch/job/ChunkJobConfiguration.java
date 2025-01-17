@@ -17,8 +17,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class ChunkJobConfiguration {
 
-    private final PlatformTransactionManager platformTransactionManager;
     private final JobRepository jobRepository;
+    private final PlatformTransactionManager platformTransactionManager;
 
     private static int value = 0;
     private static int chunkCount = 1;

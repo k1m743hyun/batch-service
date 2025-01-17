@@ -19,8 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 public class TaskletJobConfiguration {
 
-    private final PlatformTransactionManager platformTransactionManager;
     private final JobRepository jobRepository;
+    private final PlatformTransactionManager platformTransactionManager;
 
     @Bean
     public Job simpleJob1(Step simpleStep1, Step simpleStep2) {
