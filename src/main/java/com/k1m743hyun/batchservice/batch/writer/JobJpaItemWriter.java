@@ -1,12 +1,11 @@
 package com.k1m743hyun.batchservice.batch.writer;
 
-import jakarta.persistence.EntityManagerFactory;
-
-import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.stereotype.Component;
+
 import com.k1m743hyun.batchservice.batch.entity.NewProduct;
-import com.k1m743hyun.batchservice.batch.entity.Product;
+
+import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

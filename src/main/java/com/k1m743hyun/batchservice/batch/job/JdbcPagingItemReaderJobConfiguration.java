@@ -1,18 +1,21 @@
 package com.k1m743hyun.batchservice.batch.job;
 
-import com.k1m743hyun.batchservice.batch.entity.Product;
-import com.k1m743hyun.batchservice.batch.reader.JobJdbcCursorItemReader;
-import com.k1m743hyun.batchservice.batch.reader.JobJdbcPagingItemReader;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import com.k1m743hyun.batchservice.batch.entity.Product;
+import com.k1m743hyun.batchservice.batch.reader.JobJdbcPagingItemReader;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -25,12 +28,13 @@ public class JdbcPagingItemReaderJobConfiguration {
     private final JobJdbcPagingItemReader jobReader;
 
     @Bean
-    public Job jdbcPagingItemReaderJob(Step jdbcPagingItemReaderStep) {
+    public Job jdbcPagingItemReaderJob(@Qualifier("jdbcPagingItemReaderStep") Step jdbcPagingItemReaderStep) {
         return new JobBuilder("jdbcPagingItemReaderJob", jobRepository)
                 .start(jdbcPagingItemReaderStep)
                 .build();
     }
 
+    @JobScope
     @Bean
     public Step jdbcPagingItemReaderStep() throws Exception {
         return new StepBuilder("jdbcPagingItemReaderStep", jobRepository)

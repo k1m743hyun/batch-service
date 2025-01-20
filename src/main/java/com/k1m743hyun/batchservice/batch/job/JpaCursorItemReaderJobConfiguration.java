@@ -1,21 +1,23 @@
 package com.k1m743hyun.batchservice.batch.job;
 
-import com.k1m743hyun.batchservice.batch.entity.Product;
-import com.k1m743hyun.batchservice.batch.reader.JobJdbcCursorItemReader;
-import com.k1m743hyun.batchservice.batch.reader.JobJpaCursorItemReader;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Iterator;
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import java.util.Iterator;
-import java.util.Objects;
+import com.k1m743hyun.batchservice.batch.entity.Product;
+import com.k1m743hyun.batchservice.batch.reader.JobJpaCursorItemReader;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -28,12 +30,13 @@ public class JpaCursorItemReaderJobConfiguration {
     private final JobJpaCursorItemReader jobReader;
 
     @Bean
-    public Job jpaCursorItemReaderJob(Step jpaCursorItemReaderStep) {
+    public Job jpaCursorItemReaderJob(@Qualifier("jpaCursorItemReaderStep") Step jpaCursorItemReaderStep) {
         return new JobBuilder("jpaCursorItemReaderJob", jobRepository)
                 .start(jpaCursorItemReaderStep)
                 .build();
     }
 
+    @JobScope
     @Bean
     public Step jpaCursorItemReaderStep() {
         return new StepBuilder("jpaCursorItemReaderStep", jobRepository)

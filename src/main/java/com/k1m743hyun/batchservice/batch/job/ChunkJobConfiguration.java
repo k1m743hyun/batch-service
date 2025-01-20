@@ -1,16 +1,18 @@
 package com.k1m743hyun.batchservice.batch.job;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -24,7 +26,7 @@ public class ChunkJobConfiguration {
     private static int chunkCount = 1;
 
     @Bean
-    public Job job3(Step step3) {
+    public Job job3(@Qualifier("step3") Step step3) {
         return new JobBuilder("job3", jobRepository)
                 .start(step3)
                 .build();
