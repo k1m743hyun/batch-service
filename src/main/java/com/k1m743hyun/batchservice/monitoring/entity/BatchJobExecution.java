@@ -1,8 +1,11 @@
 package com.k1m743hyun.batchservice.monitoring.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -21,4 +24,13 @@ public class BatchJobExecution {
 	private String exitCode;
     private String exitMessage;
     private LocalDateTime lastUpdated;
+
+    @ManyToOne
+    private BatchJobInstance instance;
+
+    @OneToMany
+    private List<BatchJobExecutionParams> contextList;
+
+    @OneToMany
+    private List<BatchJobExecutionParams> paramList;    
 }
