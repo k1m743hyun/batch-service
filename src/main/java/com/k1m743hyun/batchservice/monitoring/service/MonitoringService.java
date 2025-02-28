@@ -4,5 +4,7 @@ import com.k1m743hyun.batchservice.monitoring.dto.response.MonitoringResponseDto
 
 public interface MonitoringService {
 	
-	MonitoringResponseDto getErrorList();
+	MonitoringResponseDto getJobErrorList();
+
+	MonitoringResponseDto getStepErrorList();
 }

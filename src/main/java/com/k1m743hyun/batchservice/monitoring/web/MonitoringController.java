@@ -15,9 +15,13 @@ public class MonitoringController {
 	
 	private final MonitoringService service;
 
-	@GetMapping("")
-	public MonitoringResponseDto getErrorList(MonitoringRequestDto requestDto) {
-		return service.getErrorList();
+	@GetMapping("/jobs/errors")
+	public MonitoringResponseDto getJobErrorList(MonitoringRequestDto requestDto) {
+		return service.getJobErrorList();
 	}
 
+	@GetMapping("/steps/errors")
+	public MonitoringResponseDto getStepErrorList(MonitoringRequestDto requestDto) {
+		return service.getStepErrorList();
+	}
 }
